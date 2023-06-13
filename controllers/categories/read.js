@@ -3,21 +3,21 @@ import Category from "../../models/Category.js";
 export default async (req, res) => {
     try {
         let all = await Category.find()
-        if (all) {
+        if (all.length>0) {
             return res.status(200).json({
-                response: all,
-                message: 'categories found'
+                success: true,
+                response: all
             })
         }else {
-            return res.status(400).json({
-                response:null,
+            return res.status(404).json({
+                success:false,
                 message: 'categories not found'
 
             })
         }
     } catch (error) {
         return res.status(500).json({
-            response: null,
+            success:false,
             message: 'error'
 
         })
